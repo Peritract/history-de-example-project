@@ -7,6 +7,7 @@ from csv import DictWriter
 from dotenv import load_dotenv
 import requests as req
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 
 
 def scrape_page(url: str) -> BeautifulSoup:
@@ -18,7 +19,7 @@ def scrape_page(url: str) -> BeautifulSoup:
     raise ValueError("Invalid URL.")
 
 
-def get_user_data(question: BeautifulSoup) -> dict:
+def get_user_data(question: Tag) -> dict:
     """Extracts user data from a question object."""
     user = question.find("div", class_="s-user-card--link")
     user_link = user.find("a")
