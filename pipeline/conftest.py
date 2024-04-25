@@ -7,6 +7,7 @@ def fake_question_no_user_link():
                 <div class="s-user-card--link">
                     Name
                 </div>
+                <div>
             </div>
         """
 

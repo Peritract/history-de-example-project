@@ -75,8 +75,11 @@ if __name__ == "__main__":
 
     questions = []
     for page_num in range(1, int(ENV["MAX_PAGES"]) + 1):
-        page = scrape_page(f"{ENV['BASE_URL']}/questions?tab=newest&page={page_num}")
-        questions.extend(get_questions_from_page(page))
-        sleep(1)
+        try:
+            page = scrape_page(f"{ENV['BASE_URL']}/questions?tab=newest&page={page_num}")
+            questions.extend(get_questions_from_page(page))
+            sleep(1)
+        except (ValueError, IndexError):
+            print("failed on Page {page_num}.")
 
     write_data_to_csv(questions, ENV["OUTPUT_FILE"])
